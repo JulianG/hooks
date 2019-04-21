@@ -1,3 +1,85 @@
+# usePromiseSubscription
+
+Custom React Hook that properly waits for a promise to resolve.  
+It automatically unsubscribes if the component is unmounted.
+
+## Requirements:
+
+* React 16.8.0 or higher
+
+## Install
+
+For now you can install from GitHub:
+```
+npm install https://github.com/JulianG/use-promise-subscription.git
+```
+or
+```
+yarn add https://github.com/JulianG/use-promise-subscription.git
+```
+
+## Use
+
+Import the function:
+
+```js
+import { usePromiseSubscription } from 'use-promise-subscription';
+```
+
+### Basic usage:
+```js
+const App = ({ client }) => {
+
+  const [bananas] = usePromiseSubscription(client.fetchBananas, [], [client])
+
+  return (
+    <ul>
+    {bananas.map(banana => <li>{banana}<li>)}
+    </ul>
+  )
+}
+```
+The first render will use the empty array passed as a default value.  
+The next render will -probably- have some bananas in the `bananas` array.
+
+### Advanced usage:
+
+Handling errors and loading state.
+```js
+const App = ({ client }) => {
+
+  const [bananas, error, pending] = usePromiseSubscription(client.fetchBananas, [], [client])
+
+  return (
+    <ul>
+    {pending && <li>Loading...</li>}
+    {!pending && error && <li>Error! {error.toString()}</li>)}
+    {!pending && !error && bananas.map(banana => <li>{banana}<li>)}
+    </ul>
+  )
+}
+```
+On the first render `pending` is true and the "loading" message is rendered.  
+The next time the promise will have resolved or rejected.
+`error` will be 'truthy' if the promise was rejected, and error message can be displayed.
+In most cases the promise will have resolved and the `bananas` array is displayed.
+
+----
+
+```
+
+
+
+
+
+
+
+
+
+```
+
+----
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
