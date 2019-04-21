@@ -1,7 +1,9 @@
 # usePromiseSubscription
 
-Custom React Hook that properly waits for a promise to resolve.  
-It automatically unsubscribes if the component is unmounted.
+![usePromiseSubscription | Photo by Vivek Doshi on Unsplash](./usePromiseSubscription.png)<span style="font-size: 50%">(Photo by <a href="https://unsplash.com/photos/ltmVkMzz0o0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vivek Doshi</a> on Unsplash)</span>
+
+Custom React Hook that properly awaits a promise to resolve.  
+It automatically 'unsubscribes' if the component is unmounted.
 
 ## Requirements:
 
@@ -42,6 +44,8 @@ const App = ({ client }) => {
 The first render will use the empty array passed as a default value.  
 The next render will -probably- have some bananas in the `bananas` array.
 
+**Note that there is no need to `useState` to keep track of `bananas`.**
+
 ### Advanced usage:
 
 Handling errors and loading state.
@@ -65,6 +69,13 @@ The next time the promise will have resolved or rejected.
 In most cases the promise will have resolved and the `bananas` array is displayed.
 
 ----
+
+
+## Development
+
+* yarn install
+* yarn test
+* yarn build
 
 ```
 
