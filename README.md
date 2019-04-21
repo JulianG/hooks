@@ -71,7 +71,7 @@ In most cases the promise will have resolved and the `bananas` array is displaye
 ----
 
 
-## Development
+## Develop
 
 * yarn install
 * yarn test
