@@ -1,7 +1,5 @@
 # usePromiseSubscription
 
-![usePromiseSubscription | Photo by Vivek Doshi on Unsplash](./usePromiseSubscription.png)<span style="font-size: 50%">(Photo by <a href="https://unsplash.com/photos/ltmVkMzz0o0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vivek Doshi</a> on Unsplash)</span>
-
 Custom React Hook that properly awaits a promise to resolve.  
 It automatically 'unsubscribes' if the component is unmounted.
 
