@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-function usePromiseSubscription(promiseOrFunction, defaultValue, deps) {
+function usePromiseSubscription(promiseOrFunction, defaultValue) {
     var _a = React.useState({
         value: defaultValue,
         error: null,
@@ -24,7 +24,7 @@ function usePromiseSubscription(promiseOrFunction, defaultValue, deps) {
         return function () {
             isSubscribed = false;
         };
-    }, deps);
+    }, [promiseOrFunction, defaultValue]);
     var value = state.value, error = state.error, isPending = state.isPending;
     return [value, error, isPending];
 }

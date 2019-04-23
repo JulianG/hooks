@@ -4,9 +4,8 @@ export type AsyncFunctionOrPromise<T> = (() => Promise<T>) | Promise<T>;
 
 export function usePromiseSubscription<T>(
   promiseOrFunction: AsyncFunctionOrPromise<T>,
-  defaultValue: T,
-  deps: React.DependencyList
-) {
+  defaultValue: T
+): [T, Error | string | null, boolean] {
   const [state, setState] = React.useState({
     value: defaultValue,
     error: null,
@@ -33,7 +32,7 @@ export function usePromiseSubscription<T>(
     return () => {
       isSubscribed = false;
     };
-  }, deps);
+  }, [promiseOrFunction, defaultValue]);
 
   const { value, error, isPending } = state;
   return [value, error, isPending];

@@ -2,54 +2,70 @@ import React from 'react';
 
 import { usePromiseSubscription, AsyncFunctionOrPromise } from './index'
 
-import { render, cleanup, waitForDomChange } from 'react-testing-library'
+import { render, cleanup, waitForDomChange, Matcher } from 'react-testing-library'
 
 describe('usePromiseSubscription tests', async () => {
 
   afterEach(cleanup)
 
-  function HookTester(props: { asyncFunctionOrPromise: AsyncFunctionOrPromise<any>, initialValue: any }) {
-    const { asyncFunctionOrPromise, initialValue } = props
-    const [value, error] = usePromiseSubscription(asyncFunctionOrPromise, initialValue, [])
-    const errorToString = (error: string | Error) => (error instanceof Error) ? error.message : error.toString()
-    return (!error)
-      ? value
-      : errorToString(error)
+  type Props = { promise: (() => Promise<any>) | Promise<any>, initialValue: any }
+
+  const errorToString = (error: string | Error) => (error instanceof Error) ? error.message : error.toString()
+
+  function HookTester({ promise, initialValue }: Props) {
+    const [value, error] = usePromiseSubscription(promise, initialValue)
+    return (!error) ? value : errorToString(error)
+  }
+
+  function renderHookTest(promise: Props['promise']) {
+    return render(
+      <HookTester promise={promise} initialValue={'loading...'} />
+    )
+  }
+
+  async function testAssertions(getByText: (text: Matcher) => HTMLElement, expected: string) {
+    getByText('loading...')
+    await waitForDomChange()
+    getByText(expected)
   }
 
   describe('passing an async function', () => {
 
     it('updates the value when the promise resolves', async () => {
+      const { getByText } = renderHookTest(() => Promise.resolve('success!'))
+      await testAssertions(getByText, 'success!')
+    })
 
-      const { getByText } = render(
-        <HookTester
-          asyncFunctionOrPromise={() => Promise.resolve('success!')}
-          initialValue={'loading...'}
-        />
+    it('updates the error with the rejection reason when the promise is rejected', async () => {
+      const { getByText } = renderHookTest(() => Promise.reject('epic fail!'))
+      await testAssertions(getByText, 'epic fail!')
+    })
+
+    it('the async function is called only once, even after re-rendering', async () => {
+
+      const asyncFunction = jest.fn(() => Promise.resolve('success!'))
+
+      const { getByText, rerender } = render(
+        <HookTester promise={asyncFunction} initialValue={'loading...'} />
       )
-
-      getByText('loading...')
 
       await waitForDomChange()
 
       getByText('success!')
 
-    })
+      rerender(<HookTester
+        promise={asyncFunction}
+        initialValue={'loading...'}
+      />)
 
-    it('it updates the error with the rejection reason when the promise is rejected', async () => {
+      rerender(<HookTester
+        promise={asyncFunction}
+        initialValue={'loading...'}
+      />)
 
-      const { getByText } = render(
-        <HookTester
-          asyncFunctionOrPromise={() => Promise.reject('epic fail!')}
-          initialValue={'loading...'}
-        />
-      )
+      expect(asyncFunction).toHaveBeenCalledTimes(1)
 
-      getByText('loading...')
-
-      await waitForDomChange()
-
-      getByText('epic fail!')
+      getByText('success!')
 
     })
 
@@ -58,37 +74,13 @@ describe('usePromiseSubscription tests', async () => {
   describe('passing a promise', () => {
 
     it('updates the value when the promise resolves', async () => {
-
-      const { getByText } = render(
-        <HookTester
-          asyncFunctionOrPromise={Promise.resolve('success!')}
-          initialValue={'loading...'}
-        />
-      )
-
-      getByText('loading...')
-
-      await waitForDomChange()
-
-      getByText('success!')
-
+      const { getByText } = renderHookTest(Promise.resolve('success!'))
+      await testAssertions(getByText, 'success!')
     })
 
     it('it updates the error with the rejection reason when the promise is rejected', async () => {
-
-      const { getByText } = render(
-        <HookTester
-          asyncFunctionOrPromise={Promise.reject('epic fail!')}
-          initialValue={'loading...'}
-        />
-      )
-
-      getByText('loading...')
-
-      await waitForDomChange()
-
-      getByText('epic fail!')
-
+      const { getByText } = renderHookTest(Promise.reject('epic fail!'))
+      await testAssertions(getByText, 'epic fail!')
     })
 
   })

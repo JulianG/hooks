@@ -16,7 +16,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rm -rf ./dist/* && tsc -p tsconfig.dist.json",
-    "test": "react-scripts test --env=jsdom --silent",
+    "test": "react-scripts test --env=jsdom --silent --verbose",
+    "test:coverage": "react-scripts test --env=jsdom --silent --verbose --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
