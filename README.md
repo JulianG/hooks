@@ -3,6 +3,9 @@
 Custom React Hook that properly awaits a promise to resolve.  
 It automatically 'unsubscribes' if the component is unmounted.
 
+Here's an example on CodeSandbox:  
+[![Edit pkk3xjn00m](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pkk3xjn00m?fontsize=14)
+
 ## Requirements:
 
 * React 16.8.0 or higher
@@ -30,7 +33,7 @@ import { usePromiseSubscription } from 'use-promise-subscription';
 ```js
 const App = ({ client }) => {
 
-  const [bananas] = usePromiseSubscription(client.fetchBananas, [], [client])
+  const [bananas] = usePromiseSubscription(client.fetchBananas, [])
 
   return (
     <ul>
@@ -50,7 +53,7 @@ Handling errors and loading state.
 ```js
 const App = ({ client }) => {
 
-  const [bananas, error, pending] = usePromiseSubscription(client.fetchBananas, [], [client])
+  const [bananas, error, pending] = usePromiseSubscription(client.fetchBananas, [])
 
   return (
     <ul>
