@@ -1,10 +1,6 @@
-# usePromiseSubscription
+# Bananahooks
 
-Custom React Hook that properly awaits a promise to resolve.  
-It automatically 'unsubscribes' if the component is unmounted.
-
-Here's an example on CodeSandbox:  
-[![Edit pkk3xjn00m](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pkk3xjn00m?fontsize=14)
+"Collection" of custom React Hooks.
 
 ## Requirements:
 
@@ -14,26 +10,42 @@ Here's an example on CodeSandbox:
 
 For now you can install from GitHub:
 ```
-npm install https://github.com/JulianG/use-promise-subscription.git
+npm install https://github.com/JulianG/hooks.git
 ```
 or
 ```
-yarn add https://github.com/JulianG/use-promise-subscription.git
+yarn add https://github.com/JulianG/hooks.git
 ```
 
-## Use
+## Develop
+
+* yarn install
+* yarn test
+* yarn build
+
+----
+
+## usePromise
+
+Custom React Hook that properly awaits a promise to resolve.  
+It automatically 'unsubscribes' if the component is unmounted.
+
+Here's an example on CodeSandbox:  
+[![Edit pkk3xjn00m](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pkk3xjn00m?fontsize=14)
+
+### Usage
 
 Import the function:
 
 ```js
-import { usePromiseSubscription } from 'use-promise-subscription';
+import { usePromise } from 'bananahooks';
 ```
 
 ### Basic usage:
 ```js
 const App = ({ client }) => {
 
-  const [bananas] = usePromiseSubscription(client.fetchBananas, [])
+  const [bananas] = usePromise(client.fetchBananas, [])
 
   return (
     <ul>
@@ -53,7 +65,7 @@ Handling errors and loading state.
 ```js
 const App = ({ client }) => {
 
-  const [bananas, error, pending] = usePromiseSubscription(client.fetchBananas, [])
+  const [bananas, error, pending] = usePromise(client.fetchBananas, [])
 
   return (
     <ul>
@@ -71,12 +83,6 @@ In most cases the promise will have resolved and the `bananas` array is displaye
 
 ----
 
-
-## Develop
-
-* yarn install
-* yarn test
-* yarn build
 
 ```
 
