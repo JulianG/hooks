@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { usePromiseSubscription, AsyncFunctionOrPromise } from './index'
+import { usePromise } from './index'
 
 import { render, cleanup, waitForDomChange, Matcher } from 'react-testing-library'
 
-describe('usePromiseSubscription tests', async () => {
+describe('usePromise tests', async () => {
 
   afterEach(cleanup)
 
@@ -13,7 +13,7 @@ describe('usePromiseSubscription tests', async () => {
   const errorToString = (error: string | Error) => (error instanceof Error) ? error.message : error.toString()
 
   function HookTester({ promise, initialValue }: Props) {
-    const [value, error] = usePromiseSubscription(promise, initialValue)
+    const [value, error] = usePromise(promise, initialValue)
     return (!error) ? value : errorToString(error)
   }
 

@@ -1,5 +1,5 @@
 {
-  "name": "use-promise-subscription",
+  "name": "bananahooks",
   "version": "0.1.0",
   "private": false,
   "author": "https://juliangaramendy.dev",
@@ -9,7 +9,8 @@
     "hooks",
     "promise",
     "subscribe",
-    "unsubscribe"
+    "unsubscribe",
+    "bananas"
   ],
   "main" : "dist/index.js",
   "types": "dist/index.d.ts",
