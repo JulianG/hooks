@@ -2,7 +2,15 @@
   "name": "bananahooks",
   "version": "0.1.1",
   "private": false,
-  "author": "https://juliangaramendy.dev",
+  "author": {
+    "name": "Julian Garamendy",
+    "email": "me@juliangaramendy.dev",
+    "url": "https://juliangaramendy.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JulianG/hooks"
+  },
   "license": "MIT",
   "keywords": [
     "react",
