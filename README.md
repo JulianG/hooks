@@ -24,6 +24,15 @@ yarn install
 yarn test
 
 yarn build
+
+```
+
+### Releases
+
+```
+yarn build
+npm version [patch|minor|major]
+npm publish
 ```
 
 ----
