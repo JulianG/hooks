@@ -1,9 +1,7 @@
 import * as React from "react";
 
-export type AsyncFunctionOrPromise<T> = (() => Promise<T>) | Promise<T>;
-
 export function usePromise<T>(
-  promiseOrFunction: AsyncFunctionOrPromise<T>,
+  promiseOrFunction: (() => Promise<T>) | Promise<T>,
   defaultValue: T
 ): [T, Error | string | null, boolean] {
   const [state, setState] = React.useState({
