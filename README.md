@@ -8,20 +8,23 @@
 
 ## Install
 
-For now you can install from GitHub:
 ```
-npm install https://github.com/JulianG/hooks.git
+npm install bananahooks
 ```
 or
 ```
-yarn add https://github.com/JulianG/hooks.git
+yarn add bananahooks
 ```
 
 ## Develop
 
-* yarn install
-* yarn test
-* yarn build
+```
+yarn install
+
+yarn test
+
+yarn build
+```
 
 ----
 
