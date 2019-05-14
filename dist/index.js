@@ -1,5 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var use_promise_1 = require("./use-promise");
-exports.usePromise = use_promise_1.usePromise;
-//# sourceMappingURL=index.js.map
+
+         'use strict'
+
+      if (process.env.NODE_ENV === 'production') {
+        module.exports = require('./bananahooks.cjs.production.js')
+      } else {
+        module.exports = require('./bananahooks.cjs.development.js')
+      }

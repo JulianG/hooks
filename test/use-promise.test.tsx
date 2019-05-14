@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { usePromise } from './index'
+import { usePromise } from '../src/index'
 
 import { render, cleanup, waitForDomChange, Matcher } from 'react-testing-library'
 
