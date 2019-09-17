@@ -9,7 +9,7 @@ import {
   Matcher,
 } from '@testing-library/react';
 
-describe('usePromise tests', async () => {
+describe('usePromise tests', () => {
   afterEach(cleanup);
 
   type Props = {

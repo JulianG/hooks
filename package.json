@@ -29,7 +29,7 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test --env=jsdom --silent  --verbose --watch",
+    "test": "tsdx test --env=jsdom --watch",
     "test:coverage": "tsdx test --env=jsdom --silent --verbose --coverage"
   },
   "peerDependencies": {
