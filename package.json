@@ -54,8 +54,8 @@
     "husky": "^2.2.0",
     "prettier": "^1.17.1",
     "pretty-quick": "^1.10.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "tsdx": "^0.5.9",
     "tslib": "^1.9.3",
     "typescript": "^3.4.5"
