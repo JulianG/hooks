@@ -72,6 +72,26 @@ describe('usePromise tests', () => {
 
       getByText('success!');
     });
+
+    it('the async function is called only twice, if we re-render with new props once', async () => {
+      const asyncFunction = jest.fn(() => Promise.resolve('success!'));
+
+      const { getByText, rerender } = render(
+        <HookTester promise={asyncFunction} initialValue={'loading...'} />
+      );
+
+      await waitForDomChange();
+
+      getByText('success!');
+
+      rerender(
+        <HookTester promise={asyncFunction} initialValue={'extra loading...'} />
+      );
+
+      expect(asyncFunction).toHaveBeenCalledTimes(2);
+
+      getByText('success!');
+    });
   });
 
   describe('passing a promise', () => {
