@@ -7,6 +7,7 @@ import {
   cleanup,
   waitForDomChange,
   Matcher,
+  act,
 } from '@testing-library/react';
 
 describe('usePromise tests', () => {
@@ -84,10 +85,14 @@ describe('usePromise tests', () => {
 
       getByText('success!');
 
-      rerender(
-        <HookTester promise={asyncFunction} initialValue={'extra loading...'} />
-      );
-
+      await act(async () => {
+        rerender(
+          <HookTester
+            promise={asyncFunction}
+            initialValue={'extra loading...'}
+          />
+        );
+      });
       expect(asyncFunction).toHaveBeenCalledTimes(2);
 
       getByText('success!');
